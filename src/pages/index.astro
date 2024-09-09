@@ -14,3 +14,32 @@
 		<h1>hola</h1>
 	</body>
 </html>
+<script>
+    import { supabase } from "../auth/supabaseClient";
+    
+    // Al cargar la página
+    window.addEventListener('load', async () => {
+        const { access_token, refresh_token, expires_in } = getURLParams();
+        
+        if (access_token) {
+            // Pasa el token a Supabase para que establezca la sesión
+            await supabase.auth.setSession({
+                access_token,
+                refresh_token
+            });
+
+            // Limpia la URL para que no tenga los tokens
+            window.history.replaceState({}, document.title, "/");
+        }
+    });
+
+    function getURLParams() {
+        const hash = window.location.hash;
+        const params = new URLSearchParams(hash.substring(1)); // Eliminar el "#" al principio
+        return {
+            access_token: params.get('access_token'),
+            refresh_token: params.get('refresh_token'),
+            expires_in: params.get('expires_in')
+        };
+    }
+</script>
