@@ -8,7 +8,13 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { error } = await supabase.auth.signInWithOtp({ email });
+        const { error } = await supabase.auth.signInWithOtp({ 
+            email,
+            options: {
+                // set this to false if you do not want the user to be automatically signed up
+                shouldCreateUser: false,
+            },   
+        });
 
         if (error) {
             setError("Error al enviar el enlace. Inténtalo de nuevo.");
