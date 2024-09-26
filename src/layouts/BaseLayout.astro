@@ -1,0 +1,31 @@
+---
+import NavBar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro"
+---
+<!-- desarrollado por RobertCoder (www.robertcoder.com) -->
+<!-- IddO Tec 2024 (www.iddotec.com) -->
+<html lang="es" class="scroll-smooth">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="PROECUS" />
+        <meta name="description" content="Descubre cómo Proecus, líder en el sector agropecuario, ofrece soluciones innovadoras y sostenibles. Explora nuestros productos y servicios diseñados para impulsar el éxito de tu negocio">
+        <meta property="og:url" content="www.proecus.org" />
+        <meta
+            property="og:image"
+            content="http://drive.google.com/uc?export=view&id=1KjAPtI8GLz4AtZUlnC77oUUiDZjgNmpQ"
+        />
+        <meta property="og:description" content="Servicios ambientales especializados" />
+        <title>Ferretería México</title>
+        <script src="../../node_modules/preline/dist/preline.js"></script>
+        <script defer src="https://unpkg.com/tailwindcss-intersect@1.x.x/dist/observer.min.js"></script>
+    </head>
+    <body class="max-w-screen-2xl mx-auto">
+        <NavBar />
+        <slot />
+        <Footer/>
+    </body>
+</html>
