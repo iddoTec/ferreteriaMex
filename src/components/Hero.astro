@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+import hero1 from "../../public/img/hero/hero1.png";
+---
+
+<section id="hero" class="scroll-mt-16 lg:p-4 size-tb:-mt-16 size-pc:-mt-20">
+
+    <article>
+        <div
+            data-hs-carousel='{"loadingClasses": "opacity-0", "isAutoPlay": true }'
+            class="relative"
+        >
+            <div
+                class="hs-carousel relative overflow-hidden w-full h-[400px] md:h-[550px] lg:h-[720px] xl:h-[950px] lg:rounded-3xl"
+            >
+                <div
+                    class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0"
+                >
+
+                    <div class="hs-carousel-slide">
+                        <a href="/catalog/category1">
+                            <div class="flex flex-col items-center justify-center mt-14 w-full h-[320px] md:h-[500px] lg:h-[720px] xl:h-[950px]">
+                                <Image class=" w-full h-full object-cover object-left-top" src={hero1} alt="producto1"/>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- <div class="hs-carousel-slide">
+                        <a href="/catalog/category3">
+                            <div class="flex flex-col items-center justify-center h-full">
+                                <Image class="object-cover object-top h-full sm:h-5/6 sm:w-5/6 lg:w-full" src={hero1} alt="producto2"/>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="hs-carousel-slide">
+                        <a href="/catalog/category4">
+                            <div class="flex flex-col items-center justify-center h-full">
+                                <Image class="object-cover object-top h-full sm:h-5/6 sm:w-5/6 lg:w-full" src={hero1} alt="producto3"/>
+                            </div>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </article>
+</section>

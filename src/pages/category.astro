@@ -3,17 +3,10 @@ import { Image } from "astro:assets";
 import wc from "../../public/img/category/wc.png";
 import electri from "../../public/img/category/electri.png";
 import ferre from "../../public/img/category/ferre.png";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Ferretería México</title>
-    </head>
-    <body
+<BaseLayout>
+    <section
         class="w-full h-full flex flex-col justify-center items-center lg:max-w-screen-2xl lg:mx-auto"
     >
         <section class="lg:ml-12 my-4">
@@ -207,5 +200,5 @@ import ferre from "../../public/img/category/ferre.png";
                 </a>
             </div>
         </section>
-    </body>
-</html>
+    </section>
+</BaseLayout>

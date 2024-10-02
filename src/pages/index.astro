@@ -3,73 +3,44 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CarouselPC from "../components/CarouselTB.astro";
 import CarouselTB from "../components/CarouselPC.astro";
 import CarouselMB from "../components/CarouselMB.astro";
+import Hero from "../components/Hero.astro";
+import Contact from "../components/Contact.astro";
 
-
-const carrusel1 = [
-    {
-        img: "img/facebook.png",
-        nombre: "producto 1",
-        descripcion:
-            "Tanque de 180Lts marca CYTSA está fabricado con acero que cumple con especificaciones ASTM, con pintura anticorrosiva en polvo horneable color blanca aplicado con proceso electrostático espesor de 50 micrómetros, cuenta con válvulas de seguridad, llenado, servicio e indicador de nivel.",
-        precio: "9500",
-    },
-    {
-        img: "img/facebook.png",
-        nombre: "producto 2",
-        descripcion:
-            "Cuerpo de acero con recubrimiento de pintura electrostática, resistente a la corrosión",
-        precio: "2150",
-    },
-    {
-        img: "img/facebook.png",
-        nombre: "producto 3",
-        descripcion:
-            "Cuerpo de acero con recubrimiento de pintura electrostática, resistente a la corrosión",
-        precio: "2150",
-    },
-    {
-        img: "img/facebook.png",
-        nombre: "producto 4",
-        descripcion:
-            "Cuerpo de acero con recubrimiento de pintura electrostática, resistente a la corrosión",
-        precio: "2150",
-    },
-    {
-        img: "img/facebook.png",
-        nombre: "producto 5",
-        descripcion:
-            "Cuerpo de acero con recubrimiento de pintura electrostática, resistente a la corrosión",
-        precio: "2150",
-    },
-    {
-        img: "img/facebook.png",
-        nombre: "producto 6",
-        descripcion:
-            "Cuerpo de acero con recubrimiento de pintura electrostática, resistente a la corrosión",
-        precio: "2150",
-    },
-    {
-        img: "img/facebook.png",
-        nombre: "producto 7",
-        descripcion:
-            "Cuerpo de acero con recubrimiento de pintura electrostática, resistente a la corrosión",
-        precio: "2150",
-    },
-    {
-        img: "img/facebook.png",
-        nombre: "producto 8",
-        descripcion:
-            "Cuerpo de acero con recubrimiento de pintura electrostática, resistente a la corrosión",
-        precio: "2150",
-    },
-];
-
+import { carrusel1 } from "../../public/img/carrusel1/carrusel1";
 ---
 
 <BaseLayout>
-    <CarouselPC products={carrusel1}/>
-    <CarouselTB products={carrusel1}/>
-    <CarouselMB products={carrusel1}/>
+    <Hero />
+    <section id="promotions" class="scroll-mt-24">
+        <div class="relative flex items-center justify-center my-12">
+            <div
+                class="w-full h-1 bg-sky-600"
+            >
+            </div>
+            <div
+                class="absolute px-4 py-1 bg-gray-100 text-black font-medium border-2 border-gray-300 rounded-full text-lg"
+            >
+                Productos destacados
+            </div>
+        </div>
+    </section>
+    <CarouselPC products={carrusel1} />
+    <CarouselTB products={carrusel1} />
+    <CarouselMB products={carrusel1} />
+    <section>
+        <div class="relative flex items-center justify-center my-12">
+            <div
+                class="w-full h-1 bg-sky-600"
+            >
+            </div>
+            <div
+                class="absolute px-4 py-1 bg-gray-100 text-black font-medium border-2 border-gray-300 rounded-full text-lg"
+            >
+                Contáctanos
+            </div>
+        </div>
+    </section>
+    <Contact/>
 </BaseLayout>
 
 <script>

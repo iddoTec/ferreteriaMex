@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets"
+import mision from "../../public/img/mision.jpg"
+import vision from "../../public/img/vision.jpg"
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+<section id="about" class="mt-7 scroll-mt-12 lg:mt-14 lg:p-4">
+    <div class="p-4 pt-10 pb-5 bg-gradient-to-b from-safer-700 to-safer-600 lg:rounded-3xl lg:py-10">
+        <article class="flex flex-col justify-center items-center lg:flex-row lg:justify-evenly">
+            <div>
+                <h2 class="text-2xl text-black font-semibold text-center mb-4 lg:text-4xl">Misión</h2>
+                <p class="lg:max-w-[40rem] text-base text-black text-justify lg:text-2xl lg:pr-4">Proveer a nuestros clientes de productos de alta calidad en herramientas y suministros para el hogar y albercas, ofreciendo un servicio excepcional y asesoría especializada para ayudarles a realizar sus proyectos con éxito, a la vez que contribuimos al desarrollo de nuestra comunidad y fomentamos relaciones de confianza a largo plazo</p>
+            </div>
+            <Image class="my-8 lg:max-w-[38rem] intersect:animate-fade intersect:animate-duration-[2500ms] intersect:animate-delay-200" src={mision} alt="mision"/>
+        </article>
+        <article class="flex flex-col-reverse justify-center items-center lg:flex-row lg:justify-evenly">
+            <Image class="my-8 lg:max-w-[38rem] intersect:animate-fade intersect:animate-duration-[2500ms] intersect:animate-delay-200" src={vision} alt="vision"/>
+            <div>
+                <h2 class="text-2xl text-black font-semibold text-center mb-4 lg:text-4xl">Visión</h2>
+                <p class="lg:max-w-[40rem] text-base text-black text-justify lg:text-2xl lg:pl-4">Ser la ferretería líder en la región, reconocida por nuestra amplia variedad de productos innovación en servicios y compromiso con la satisfacción del cliente, impulsando el crecimiento sostenible y convirtiéndonos en la primera opción para profesionales y entusiastas del bricolaje</p>
+            </div>
+        </article>
+    </div>
+</section>
+</BaseLayout>

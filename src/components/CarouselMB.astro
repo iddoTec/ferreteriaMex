@@ -2,8 +2,8 @@
 const { products } = Astro.props;
 ---
 
-<section id="carousel" class="scroll-mt-20 mt-10 sm:mt-0 sm:px-4 overflow-x-hidden ">
-    <article class="col-span-2  size-tb:hidden">
+<section id="carousel" class="scroll-mt-20 mt-10 sm:mt-0 sm:px-4 overflow-x-hidden">
+    <article class="col-span-2 size-tb:hidden">
         <div
             data-hs-carousel='{"loadingClasses": "opacity-0", "isAutoPlay": true }'
             class="relative"
@@ -14,32 +14,31 @@ const { products } = Astro.props;
                 <div
                     class="hs-carousel-body top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0"
                 >
-
-                
                     <div class="hs-carousel-slide">
                         <div class="flex justify-center h-full">
                             {
                                 products.slice(0, 1).map((product) => (
-                                    <div class="container py-24">
+                                    <div class="container">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <img
-                                                src={product.img}
-                                                alt={product.nombre}
-                                                class="h-48 w-full object-cover mb-4"
-                                            />
+                                            <div class="relative">
+                                                <img
+                                                    src={product.img}
+                                                    alt={product.nombre}
+                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                />
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                    ${product.precio}
+                                                </div>
+                                            </div>
 
                                             <div class="p-6">
-                                                <small class="text-gray-900 text-xs">
-                                                    Category
-                                                </small>
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
                                                     {product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6">
-                                                    A wonderful serenity has taken
-                                                    possession of my entire soul, like
-                                                    these sweet mornings of spring which I
-                                                    enjoy with my whole heart.
+                                                <p class="text text-gray-500 leading-6 h-24">
+                                                    {product.descripcion.length > 130
+                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                        : product.descripcion}
                                                 </p>
                                             </div>
                                         </div>
@@ -53,26 +52,27 @@ const { products } = Astro.props;
                         <div class="flex justify-center h-full">
                             {
                                 products.slice(1, 2).map((product) => (
-                                    <div class="container py-24">
+                                    <div class="container">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <img
-                                                src={product.img}
-                                                alt={product.nombre}
-                                                class="h-48 w-full object-cover mb-4"
-                                            />
+                                            <div class="relative">
+                                                <img
+                                                    src={product.img}
+                                                    alt={product.nombre}
+                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                />
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                    ${product.precio}
+                                                </div>
+                                            </div>
 
                                             <div class="p-6">
-                                                <small class="text-gray-900 text-xs">
-                                                    Category
-                                                </small>
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
                                                     {product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6">
-                                                    A wonderful serenity has taken
-                                                    possession of my entire soul, like
-                                                    these sweet mornings of spring which I
-                                                    enjoy with my whole heart.
+                                                <p class="text text-gray-500 leading-6 h-24">
+                                                    {product.descripcion.length > 130
+                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                        : product.descripcion}
                                                 </p>
                                             </div>
                                         </div>
@@ -82,31 +82,31 @@ const { products } = Astro.props;
                         </div>
                     </div>
 
-
                     <div class="hs-carousel-slide">
                         <div class="flex justify-center h-full">
                             {
                                 products.slice(2, 3).map((product) => (
-                                    <div class="container py-24">
+                                    <div class="container">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <img
-                                                src={product.img}
-                                                alt={product.nombre}
-                                                class="h-48 w-full object-cover mb-4"
-                                            />
+                                            <div class="relative">
+                                                <img
+                                                    src={product.img}
+                                                    alt={product.nombre}
+                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                />
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                    ${product.precio}
+                                                </div>
+                                            </div>
 
                                             <div class="p-6">
-                                                <small class="text-gray-900 text-xs">
-                                                    Category
-                                                </small>
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
                                                     {product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6">
-                                                    A wonderful serenity has taken
-                                                    possession of my entire soul, like
-                                                    these sweet mornings of spring which I
-                                                    enjoy with my whole heart.
+                                                <p class="text text-gray-500 leading-6 h-24">
+                                                    {product.descripcion.length > 130
+                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                        : product.descripcion}
                                                 </p>
                                             </div>
                                         </div>
@@ -120,26 +120,27 @@ const { products } = Astro.props;
                         <div class="flex justify-center h-full">
                             {
                                 products.slice(3, 4).map((product) => (
-                                    <div class="container py-24">
+                                    <div class="container">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <img
-                                                src={product.img}
-                                                alt={product.nombre}
-                                                class="h-48 w-full object-cover mb-4"
-                                            />
+                                            <div class="relative">
+                                                <img
+                                                    src={product.img}
+                                                    alt={product.nombre}
+                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                />
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                    ${product.precio}
+                                                </div>
+                                            </div>
 
                                             <div class="p-6">
-                                                <small class="text-gray-900 text-xs">
-                                                    Category
-                                                </small>
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
                                                     {product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6">
-                                                    A wonderful serenity has taken
-                                                    possession of my entire soul, like
-                                                    these sweet mornings of spring which I
-                                                    enjoy with my whole heart.
+                                                <p class="text text-gray-500 leading-6 h-24">
+                                                    {product.descripcion.length > 130
+                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                        : product.descripcion}
                                                 </p>
                                             </div>
                                         </div>
@@ -152,26 +153,27 @@ const { products } = Astro.props;
                         <div class="flex justify-center h-full">
                             {
                                 products.slice(4, 5).map((product) => (
-                                    <div class="container py-24">
+                                    <div class="container">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <img
-                                                src={product.img}
-                                                alt={product.nombre}
-                                                class="h-48 w-full object-cover mb-4"
-                                            />
+                                            <div class="relative">
+                                                <img
+                                                    src={product.img}
+                                                    alt={product.nombre}
+                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                />
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                    ${product.precio}
+                                                </div>
+                                            </div>
 
                                             <div class="p-6">
-                                                <small class="text-gray-900 text-xs">
-                                                    Category
-                                                </small>
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
                                                     {product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6">
-                                                    A wonderful serenity has taken
-                                                    possession of my entire soul, like
-                                                    these sweet mornings of spring which I
-                                                    enjoy with my whole heart.
+                                                <p class="text text-gray-500 leading-6 h-24">
+                                                    {product.descripcion.length > 130
+                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                        : product.descripcion}
                                                 </p>
                                             </div>
                                         </div>
@@ -185,26 +187,27 @@ const { products } = Astro.props;
                         <div class="flex justify-center h-full">
                             {
                                 products.slice(5, 6).map((product) => (
-                                    <div class="container py-24">
+                                    <div class="container">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <img
-                                                src={product.img}
-                                                alt={product.nombre}
-                                                class="h-48 w-full object-cover mb-4"
-                                            />
+                                            <div class="relative">
+                                                <img
+                                                    src={product.img}
+                                                    alt={product.nombre}
+                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                />
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                    ${product.precio}
+                                                </div>
+                                            </div>
 
                                             <div class="p-6">
-                                                <small class="text-gray-900 text-xs">
-                                                    Category
-                                                </small>
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
                                                     {product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6">
-                                                    A wonderful serenity has taken
-                                                    possession of my entire soul, like
-                                                    these sweet mornings of spring which I
-                                                    enjoy with my whole heart.
+                                                <p class="text text-gray-500 leading-6 h-24">
+                                                    {product.descripcion.length > 130
+                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                        : product.descripcion}
                                                 </p>
                                             </div>
                                         </div>
@@ -217,26 +220,27 @@ const { products } = Astro.props;
                         <div class="flex justify-center h-full">
                             {
                                 products.slice(6, 7).map((product) => (
-                                    <div class="container py-24">
+                                    <div class="container">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <img
-                                                src={product.img}
-                                                alt={product.nombre}
-                                                class="h-48 w-full object-cover mb-4"
-                                            />
+                                            <div class="relative">
+                                                <img
+                                                    src={product.img}
+                                                    alt={product.nombre}
+                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                />
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                    ${product.precio}
+                                                </div>
+                                            </div>
 
                                             <div class="p-6">
-                                                <small class="text-gray-900 text-xs">
-                                                    Category
-                                                </small>
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
                                                     {product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6">
-                                                    A wonderful serenity has taken
-                                                    possession of my entire soul, like
-                                                    these sweet mornings of spring which I
-                                                    enjoy with my whole heart.
+                                                <p class="text text-gray-500 leading-6 h-24">
+                                                    {product.descripcion.length > 130
+                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                        : product.descripcion}
                                                 </p>
                                             </div>
                                         </div>
@@ -250,26 +254,27 @@ const { products } = Astro.props;
                         <div class="flex justify-center h-full">
                             {
                                 products.slice(7, 8).map((product) => (
-                                    <div class="container py-24">
+                                    <div class="container">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <img
-                                                src={product.img}
-                                                alt={product.nombre}
-                                                class="h-48 w-full object-cover mb-4"
-                                            />
+                                            <div class="relative">
+                                                <img
+                                                    src={product.img}
+                                                    alt={product.nombre}
+                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                />
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                    ${product.precio}
+                                                </div>
+                                            </div>
 
                                             <div class="p-6">
-                                                <small class="text-gray-900 text-xs">
-                                                    Category
-                                                </small>
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
                                                     {product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6">
-                                                    A wonderful serenity has taken
-                                                    possession of my entire soul, like
-                                                    these sweet mornings of spring which I
-                                                    enjoy with my whole heart.
+                                                <p class="text text-gray-500 leading-6 h-24">
+                                                    {product.descripcion.length > 130
+                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                        : product.descripcion}
                                                 </p>
                                             </div>
                                         </div>
@@ -278,9 +283,6 @@ const { products } = Astro.props;
                             }
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
