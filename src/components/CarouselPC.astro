@@ -33,7 +33,9 @@ const { products } = Astro.props;
 
                                             <div class="p-6">
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre}
+                                                    {product.nombre.length > 35
+                                                        ? `${product.nombre.slice(0, 35)}...`
+                                                        : product.nombre}
                                                 </h1>
                                                 <p class="text text-gray-500 leading-6 h-24">
                                                     {product.descripcion.length > 130
@@ -68,7 +70,9 @@ const { products } = Astro.props;
 
                                             <div class="p-6">
                                                 <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre}
+                                                    {product.nombre.length > 35
+                                                        ? `${product.nombre.slice(0, 35)}...`
+                                                        : product.nombre}
                                                 </h1>
                                                 <p class="text text-gray-500 leading-6 h-24">
                                                     {product.descripcion.length > 130
