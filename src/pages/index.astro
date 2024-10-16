@@ -9,6 +9,7 @@ import Contact from "../components/Contact.astro";
 import { carrusel1 } from "../../public/img/carrusel1/carrusel1";
 import { carrusel2 } from "../../public/img/carrusel2/carrusel2";
 import { carrusel3 } from "../../public/img/carrusel3/carrusel3";
+import { carrusel4 } from "../../public/img/carrusel4/carrusel4";
 ---
 
 <BaseLayout>
@@ -61,6 +62,22 @@ import { carrusel3 } from "../../public/img/carrusel3/carrusel3";
     <CarouselPC products={carrusel3} />
     <CarouselTB products={carrusel3} />
     <CarouselMB products={carrusel3} />
+    <section id="promotions" class="scroll-mt-24">
+        <div class="relative flex items-center justify-center my-12">
+            <div
+                class="w-full h-1 bg-sky-600"
+            >
+            </div>
+            <div
+                class="absolute px-4 py-1 bg-gray-100 text-black font-medium border-2 border-gray-300 rounded-full text-lg"
+            >
+                Luminaria 
+            </div>
+        </div>
+    </section>
+    <CarouselPC products={carrusel4} />
+    <CarouselTB products={carrusel4} />
+    <CarouselMB products={carrusel4} />
     <section>
         <div class="relative flex items-center justify-center my-12">
             <div
