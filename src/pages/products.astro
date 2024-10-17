@@ -1,0 +1,10 @@
+---
+// import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Product from "../components/Products";
+---
+<BaseLayout>
+    <section>
+        <Product client:load />
+    </section>
+</BaseLayout>

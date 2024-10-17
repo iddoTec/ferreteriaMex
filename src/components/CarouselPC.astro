@@ -20,11 +20,11 @@ const { products } = Astro.props;
                                 products.slice(0, 4).map((product) => (
                                     <div class="container py-4">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <div class="relative">
+                                            <div class="relative flex justify-center">
                                                 <img
                                                     src={product.img}
                                                     alt={product.nombre}
-                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                    class="h-72 w-full object-contain object-center mb-4"
                                                 />
                                                 <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
                                                     ${product.precio}
@@ -57,11 +57,11 @@ const { products } = Astro.props;
                                 products.slice(4, 8).map((product) => (
                                     <div class="container py-4">
                                         <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <div class="relative">
+                                            <div class="relative flex justify-center">
                                                 <img
                                                     src={product.img}
                                                     alt={product.nombre}
-                                                    class="h-72 w-full object-cover object-top mb-4"
+                                                    class="h-72 w-fuontain object-top mb-4"
                                                 />
                                                 <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
                                                     ${product.precio}

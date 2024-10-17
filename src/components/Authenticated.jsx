@@ -6,13 +6,13 @@ const Authenticated = ({ user }) => {
     const [codigo, setCodigo] = useState("");
     const [precio, setPrecio] = useState("");
     const [descripcion, setDescripcion] = useState("");
-    const [categoria, setCategoria] = useState("Iluminación"); // Valor predeterminado
+    const [categoria, setCategoria] = useState("Iluminación");
     const [file, setFile] = useState(null);
     const [uploading, setUploading] = useState(false);
     const [productos, setProductos] = useState([]);
-    const [editingId, setEditingId] = useState(null); // Para editar productos
+    const [editingId, setEditingId] = useState(null);
+    const [searchTerm, setSearchTerm] = useState(""); // Estado para el buscador
 
-    // Obtener productos al cargar el componente
     useEffect(() => {
         fetchProductos();
     }, []);
@@ -23,7 +23,6 @@ const Authenticated = ({ user }) => {
             console.error("Error fetching productos:", error.message);
         } else {
             setProductos(data);
-            console.log(productos);
         }
     };
 
@@ -34,7 +33,6 @@ const Authenticated = ({ user }) => {
         try {
             if (!file) throw new Error("No file selected");
 
-            // Crear un nombre de archivo único y limpio
             const cleanName = cleanFileName(file.name);
             const fileName = `${Date.now()}-${cleanName}`;
 
@@ -44,14 +42,12 @@ const Authenticated = ({ user }) => {
 
             if (error) throw error;
 
-            // Obtener la URL pública de la imagen
             const { data: publicUrlData } = supabase.storage
                 .from("productosImg")
                 .getPublicUrl(data.path);
 
             const imageUrl = publicUrlData.publicUrl;
 
-            // Insertar los datos del producto en la tabla 'productos'
             const { error: dbError } = await supabase
                 .from("productos")
                 .insert([
@@ -61,14 +57,13 @@ const Authenticated = ({ user }) => {
             if (dbError) throw dbError;
 
             alert("Producto subido exitosamente!");
-            fetchProductos(); // Actualizar lista de productos
+            fetchProductos();
 
-            // Limpiar el formulario después de la subida
             setNombre("");
             setCodigo("");
             setPrecio("");
             setDescripcion("");
-            setCategoria("Iluminación"); // Restablecer categoría a valor predeterminado
+            setCategoria("Iluminación");
             setFile(null);
         } catch (error) {
             console.error("Error uploading file:", error.message);
@@ -78,25 +73,19 @@ const Authenticated = ({ user }) => {
         }
     };
 
-    // Función para limpiar el nombre del archivo
     const cleanFileName = (fileName) => {
         return fileName
-            .toLowerCase() // Convertir a minúsculas
-            .replace(/\s+/g, "-") // Reemplazar espacios por guiones
-            .replace(/[^a-z0-9.-]/g, ""); // Eliminar caracteres no permitidos excepto letras, números, puntos y guiones
+            .toLowerCase()
+            .replace(/\s+/g, "-")
+            .replace(/[^a-z0-9.-]/g, "");
     };
 
-    // Eliminar producto
     const handleDelete = async (producto) => {
-
-        // Mostrar alerta de confirmación
         const confirmed = window.confirm(
             "¿Estás seguro de que deseas eliminar este producto?"
         );
 
-        if (!confirmed) {
-            return; // Si el usuario selecciona "Cancelar", no hacer nada
-        }
+        if (!confirmed) return;
 
         const { error: deleteError } = await supabase
             .from("productos")
@@ -108,7 +97,6 @@ const Authenticated = ({ user }) => {
             return;
         }
 
-        // Eliminar imagen del bucket
         const { error: deleteFileError } = await supabase.storage
             .from("productosImg")
             .remove([`img/${producto.url.split("/").pop()}`]);
@@ -117,19 +105,19 @@ const Authenticated = ({ user }) => {
             console.error("Error deleting file:", deleteFileError.message);
         } else {
             alert("Producto eliminado correctamente!");
-            fetchProductos(); // Actualizar lista de productos
+            fetchProductos();
         }
     };
 
-    // Iniciar edición
     const handleEdit = (producto) => {
         setNombre(producto.nombre);
+        setCodigo(producto.codigo); // Agregar esto para que el código se llene al editar
         setPrecio(producto.precio);
         setDescripcion(producto.descripcion);
+        setCategoria(producto.categoria); // Asegurarse también de cargar la categoría
         setEditingId(producto.id);
     };
 
-    // Guardar edición
     const handleSaveEdit = async () => {
         const { error } = await supabase
             .from("productos")
@@ -144,8 +132,7 @@ const Authenticated = ({ user }) => {
             console.error("Error updating product:", error.message);
         } else {
             alert("Producto actualizado correctamente!");
-            fetchProductos(); // Actualizar lista de productos
-            // Limpiar el estado de edición
+            fetchProductos();
             setNombre("");
             setPrecio("");
             setDescripcion("");
@@ -153,105 +140,154 @@ const Authenticated = ({ user }) => {
         }
     };
 
+    const filteredProductos = productos.filter((producto) =>
+        producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
-        <div>
-            <h1 className="mb-4">Bienvenido, {user.email}</h1>
-            <form onSubmit={handleUpload}>
-                {/* Formulario de subida */}
-                <div>
-                    <label>Nombre:</label>
-                    <input
-                        type="text"
-                        value={nombre}
-                        onChange={(e) => setNombre(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Código:</label>
-                    <input
-                        type="text"
-                        value={codigo}
-                        onChange={(e) => setCodigo(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Precio:</label>
-                    <input
-                        type="number"
-                        step="0.01"
-                        value={precio}
-                        onChange={(e) => setPrecio(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Descripción:</label>
-                    <textarea
-                        value={descripcion}
-                        onChange={(e) => setDescripcion(e.target.value)}
-                        required
-                    ></textarea>
-                </div>
-                <div>
-                    <label>Categoría:</label>
-                    <select
-                        value={categoria}
-                        onChange={(e) => setCategoria(e.target.value)}
-                        required
+        <div className="h-full p-6 m-6">
+            <h1 className="text-2xl font-semibold mb-6">Bienvenido, {user.email}</h1>
+
+            <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+                <h2 className="text-xl font-semibold mb-4">
+                    {editingId ? "Editar Producto" : "Agregar Producto"}
+                </h2>
+                <form onSubmit={handleUpload} className="space-y-4">
+                    <div>
+                        <label className="block font-medium">Nombre:</label>
+                        <input
+                            type="text"
+                            value={nombre}
+                            onChange={(e) => setNombre(e.target.value)}
+                            className="border rounded-md w-full px-3 py-2"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium">Código:</label>
+                        <input
+                            type="text"
+                            value={codigo}
+                            onChange={(e) => setCodigo(e.target.value)}
+                            className="border rounded-md w-full px-3 py-2"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium">Precio:</label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            value={precio}
+                            onChange={(e) => setPrecio(e.target.value)}
+                            className="border rounded-md w-full px-3 py-2"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium">Descripción:</label>
+                        <textarea
+                            value={descripcion}
+                            onChange={(e) => setDescripcion(e.target.value)}
+                            className="border rounded-md w-full px-3 py-2"
+                            required
+                        ></textarea>
+                    </div>
+                    <div>
+                        <label className="block font-medium">Categoría:</label>
+                        <select
+                            value={categoria}
+                            onChange={(e) => setCategoria(e.target.value)}
+                            className="border rounded-md w-full px-3 py-2"
+                            required // Asegúrate de que esto esté aquí para requerir la selección
+                        >
+                            <option value="">
+                                Selecciona una categoría
+                            </option>{" "}
+                            {/* Opción por defecto */}
+                            <option value="baños">Baños</option>
+                            <option value="electrico">Eléctrico</option>
+                            <option value="ferreteria">Ferretería</option>
+                            <option value="iluminacion">Iluminación</option>
+                            <option value="jardin">Jardín</option>
+                            <option value="cocina">Cocina</option>
+                            <option value="construccion">
+                                Materiales de construcción
+                            </option>
+                            <option value="estantes">Organizadores y estantes</option>
+                            <option value="plomeria">Plomería</option>
+                            <option value="seguridad">Seguridad</option>
+                            <option value="ventilacion">Ventilación</option>
+                            <option value="albercas">Albercas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className="block font-medium">Imagen del Producto:</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setFile(e.target.files[0])}
+                            className="border rounded-md w-full px-3 py-2"
+                            required
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        disabled={uploading}
+                        className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600"
                     >
-                        <option value="Iluminación">Iluminación</option>
-                        <option value="Jardín">Jardín</option>
-                        <option value="Eléctrico">Eléctrico</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Imagen del Producto:</label>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => setFile(e.target.files[0])}
-                        required
-                    />
-                </div>
-                <button type="submit" disabled={uploading}>
-                    {uploading ? "Subiendo..." : "Subir Producto"}
-                </button>
-            </form>
+                        {uploading ? "Subiendo..." : "Subir Producto"}
+                    </button>
+                </form>
+            </div>
+
+            {/* Buscador */}
+            <div className="mb-6">
+                <input
+                    type="text"
+                    placeholder="Buscar productos por nombre..."
+                    className="border rounded-md w-full px-3 py-2"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
 
             {/* Tabla de productos */}
-            <h2>Productos</h2>
-            <table>
-                <thead>
+            <h2 className="text-xl font-semibold mb-4">Productos</h2>
+            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead className="bg-gray-50">
                     <tr>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Código</th>
-                        <th>Imagen</th>
-                        <th>Acciones</th>
+                        <th className="px-4 py-2">Nombre</th>
+                        <th className="px-4 py-2">Precio</th>
+                        <th className="px-4 py-2">Categoría</th>
+                        <th className="px-4 py-2">Imagen</th>
+                        <th className="px-4 py-2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {productos.map((producto) => (
-                        <tr key={producto.id}>
-                            <td>{producto.nombre}</td>
-                            <td>{producto.precio}</td>
-                            <td>{producto.codigo}</td>
-                            <td>
-                                <a
-                                    href={producto.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Ver Imagen
-                                </a>
+                    {filteredProductos.map((producto) => (
+                        <tr key={producto.id} className="hover:bg-gray-100">
+                            <td className="border px-4 py-2">{producto.nombre}</td>
+                            <td className="border px-4 py-2">${producto.precio}</td>
+                            <td className="border px-4 py-2">{producto.categoria}</td>
+                            <td className="border px-4 py-2">
+                                <img
+                                    src={producto.url}
+                                    alt={producto.nombre}
+                                    className="h-16 w-16 object-cover rounded-md"
+                                />
                             </td>
-                            <td>
-                                <button onClick={() => handleEdit(producto)}>
+                            <td className="border px-4 py-2 space-x-2">
+                                <button
+                                    onClick={() => handleEdit(producto)}
+                                    className="bg-yellow-400 text-white rounded-md px-2 py-1 hover:bg-yellow-500"
+                                >
                                     Editar
                                 </button>
-                                <button onClick={() => handleDelete(producto)}>
+                                <button
+                                    onClick={() => handleDelete(producto)}
+                                    className="bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600"
+                                >
                                     Eliminar
                                 </button>
                             </td>
@@ -259,41 +295,6 @@ const Authenticated = ({ user }) => {
                     ))}
                 </tbody>
             </table>
-
-            {/* Formulario de edición */}
-            {editingId && (
-                <div>
-                    <h3>Editando Producto</h3>
-                    <div>
-                        <label>Nombre:</label>
-                        <input
-                            type="text"
-                            value={nombre}
-                            onChange={(e) => setNombre(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Precio:</label>
-                        <input
-                            type="number"
-                            step="0.01"
-                            value={precio}
-                            onChange={(e) => setPrecio(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Descripción:</label>
-                        <textarea
-                            value={descripcion}
-                            onChange={(e) => setDescripcion(e.target.value)}
-                            required
-                        ></textarea>
-                    </div>
-                    <button onClick={handleSaveEdit}>Guardar Cambios</button>
-                </div>
-            )}
         </div>
     );
 };
