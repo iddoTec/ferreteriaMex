@@ -9,14 +9,18 @@ import cocina from "../../public/img/category/cocina.png";
 import construc from "../../public/img/category/construc.png";
 import estan from "../../public/img/category/estan.png";
 import plomeria from "../../public/img/category/plomeria.png";
+import seguri from "../../public/img/category/seguri.png";
+import venti from "../../public/img/category/venti.png";
+import alberca from "../../public/img/category/alberca.png";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
+
 <BaseLayout>
     <section
-        class="w-full h-full flex flex-col justify-center items-center lg:max-w-screen-2xl lg:mx-auto"
+        class="w-full h-full flex flex-col justify-center items-center lg:max-w-screen-2xl lg:mx-auto mt-16 sm:mt-2 lg:mt-8"
     >
-        <section class="lg:ml-12 my-4">
-            <div class="w-full flex flex-wrap justify-center items-center md:px-14">
+        <section class="lg:ml-12">
+            <div class="w-full flex flex-wrap justify-center items-center md:px-14 gap-y-4">
                 <a href="/products?categoria=baños">
                     <div class="flex w-full">
                         <div
@@ -54,7 +58,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     </div>
                 </a>
                 <!-- item 2 -->
-                <a href="">
+                <a href="/products?categoria=electrico">
                     <div class="flex w-full">
                         <div
                             class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
@@ -92,7 +96,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </a>
 
                 <!-- item 3 -->
-                <a href="">
+                <a href="/products?categoria=ferreteria">
                     <div class="flex w-full">
                         <div
                             class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
@@ -130,7 +134,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </a>
 
                 <!-- item 4 -->
-                <a href="">
+                <a href="/products?categoria=iluminacion">
                     <div class="flex w-full">
                         <div
                             class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
@@ -168,7 +172,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </a>
 
                 <!-- item 5 -->
-                <a href="">
+                <a href="/products?categoria=jardin">
                     <div class="flex w-full">
                         <div
                             class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
@@ -206,7 +210,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </a>
 
                 <!-- item 6 -->
-                <a href="">
+                <a href="/products?categoria=cocina">
                     <div class="flex w-full">
                         <div
                             class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
@@ -244,7 +248,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </a>
 
                 <!-- item 7 -->
-                <a href="">
+                <a href="/products?categoria=construccion">
                     <div class="flex w-full">
                         <div
                             class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
@@ -282,7 +286,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </a>
 
                 <!-- item 8 -->
-                <a href="">
+                <a href="/products?categoria=estantes">
                     <div class="flex w-full">
                         <div
                             class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
@@ -297,8 +301,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                                     <span class=""
                                         ><font style="vertical-align: inherit;"
                                             ><font style="vertical-align: inherit;"
-                                                >Organizadores                                                </font
-                                            ></font
+                                                >Organizadores
+                                            </font></font
                                         ></span
                                     >
                                 </h4>
@@ -308,16 +312,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                                     <font style="vertical-align: inherit;"
                                         ><font style="vertical-align: inherit;">
                                             * Estantes metálicos <br />
-                                            * Estantes plásticos  <br />
+                                            * Estantes plásticos <br />
                                             * Repisas y mensualas <br />
                                             <br />
                                         </font></font
-
-                                        Estantes metálicos 
-                                        Estantes plásticos 
-                                        Repisas y mensualas
-
-
                                     >
                                 </p>
                             </div>
@@ -326,7 +324,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </a>
 
                 <!-- item 9 -->
-                <a href="">
+                <a href="/products?categoria=plomeria">
                     <div class="flex w-full">
                         <div
                             class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
@@ -356,18 +354,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                                             * Reparación y reemplazo <br />
                                             * Tuberías y conexiones <br />
                                         </font></font
-
-
-
-                                        Bombas y equipo hidroneumático
-                                        Calentadores de agua
-                                        Reparación y reemplazo de plomería
-                                        Tanques de gas y reguladores
-                                        Tinacos, cisternas y almacenamiento
-                                        Tuberías y conexiones
-                                        Ventilación y accesorios
-                                        
-
                                     >
                                 </p>
                             </div>
@@ -375,7 +361,131 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     </div>
                 </a>
 
+                <!-- item 10 -->
+                <a href="/products?categoria=seguridad">
+                    <div class="flex w-full">
+                        <div
+                            class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
+                        >
+                            <Image
+                                class="object-cover object-center w-full rounded-t-xl h-48"
+                                src={seguri}
+                                alt="seguri"
+                            />
+                            <div class="px-6 py-8">
+                                <h4 class="mt-4 text-3xl font-semibold text-neutral-600">
+                                    <span class=""
+                                        ><font style="vertical-align: inherit;"
+                                            ><font style="vertical-align: inherit;"
+                                                >Seguridad</font
+                                            ></font
+                                        ></span
+                                    >
+                                </h4>
+                                <p
+                                    class="mt-4 text-base font-normal text-gray-500 leading-relax"
+                                >
+                                    <font style="vertical-align: inherit;"
+                                        ><font style="vertical-align: inherit;">
+                                            * Cajas fuertes <br />
+                                            * Candados <br />
+                                            * Equipo de seguridad <br />
+                                            * Lámparas y linternas <br />
+                                        </font></font
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
 
+                <!-- item 11 -->
+                <a href="/products?categoria=ventilacion">
+                    <div class="flex w-full">
+                        <div
+                            class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
+                        >
+                            <Image
+                                class="object-cover object-center w-full rounded-t-xl h-48"
+                                src={venti}
+                                alt="venti"
+                            />
+                            <div class="px-6 py-8">
+                                <h4 class="mt-4 text-3xl font-semibold text-neutral-600">
+                                    <span class=""
+                                        ><font style="vertical-align: inherit;"
+                                            ><font style="vertical-align: inherit;"
+                                                >Ventilación</font
+                                            ></font
+                                        ></span
+                                    >
+                                </h4>
+                                <p
+                                    class="mt-4 text-base font-normal text-gray-500 leading-relax"
+                                >
+                                    <font style="vertical-align: inherit;"
+                                        ><font style="vertical-align: inherit;">
+                                            * Aire acondicionado <br />
+                                            * Ventiladores de techo <br />
+                                            <br />
+                                            <br />
+                                        </font></font
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- item 12 -->
+                <a href="/products?categoria=albercas">
+                    <div class="flex w-full">
+                        <div
+                            class="relative flex flex-col items-start m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl w-72 lg:-ml-16 lg:hover:-translate-x-16 lg:hover:-translate-y-8"
+                        >
+                            <Image
+                                class="object-cover object-center w-full rounded-t-xl h-48"
+                                src={alberca}
+                                alt="alberca"
+                            />
+                            <div class="px-6 py-8">
+                                <h4 class="mt-4 text-3xl font-semibold text-neutral-600">
+                                    <span class=""
+                                        ><font style="vertical-align: inherit;"
+                                            ><font style="vertical-align: inherit;"
+                                                >Albercas</font
+                                            ></font
+                                        ></span
+                                    >
+                                </h4>
+                                <p
+                                    class="mt-4 text-base font-normal text-gray-500 leading-relax"
+                                >
+                                    <font style="vertical-align: inherit;"
+                                        ><font style="vertical-align: inherit;">
+                                            * Limpieza de alberca <br />
+                                            * Calentamiento de alberca <br />
+                                            * Bombas para alberca <br />
+                                            * Accesorios para alberca <br />
+                                        </font></font
+
+
+                                        Limpieza de alberca 
+                                        Calentamiento de alberca 
+                                        Bombas para alberca 
+                                        Mangueras 
+                                        Accesorios para alberca 
+                                        Cascadas
+                                        Bombas para fuente
+
+
+
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
 
 
 

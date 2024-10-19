@@ -11,7 +11,7 @@ const Authenticated = ({ user }) => {
     const [uploading, setUploading] = useState(false);
     const [productos, setProductos] = useState([]);
     const [editingId, setEditingId] = useState(null);
-    const [searchTerm, setSearchTerm] = useState(""); // Estado para el buscador
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         fetchProductos();
@@ -31,40 +31,56 @@ const Authenticated = ({ user }) => {
         setUploading(true);
 
         try {
-            if (!file) throw new Error("No file selected");
+            if (!file && !editingId) throw new Error("No file selected");
 
-            const cleanName = cleanFileName(file.name);
-            const fileName = `${Date.now()}-${cleanName}`;
+            let imageUrl = "";
+            if (file) {
+                const cleanName = cleanFileName(file.name);
+                const fileName = `${Date.now()}-${cleanName}`;
 
-            const { data, error } = await supabase.storage
-                .from("productosImg")
-                .upload(`img/${fileName}`, file);
+                const { data, error } = await supabase.storage
+                    .from("productosImg")
+                    .upload(`img/${fileName}`, file);
 
-            if (error) throw error;
+                if (error) throw error;
 
-            const { data: publicUrlData } = supabase.storage
-                .from("productosImg")
-                .getPublicUrl(data.path);
+                const { data: publicUrlData } = supabase.storage
+                    .from("productosImg")
+                    .getPublicUrl(data.path);
 
-            const imageUrl = publicUrlData.publicUrl;
+                imageUrl = publicUrlData.publicUrl;
+            }
 
-            const { error: dbError } = await supabase
-                .from("productos")
-                .insert([
-                    { nombre, codigo, precio, descripcion, categoria, url: imageUrl },
-                ]);
+            if (editingId) {
+                // Update existing product
+                const { error: dbError } = await supabase
+                    .from("productos")
+                    .update({
+                        nombre,
+                        codigo,
+                        precio,
+                        descripcion,
+                        categoria,
+                        ...(file && { url: imageUrl }), // Solo actualizar la URL si hay un nuevo archivo
+                    })
+                    .eq("id", editingId);
 
-            if (dbError) throw dbError;
+                if (dbError) throw dbError;
+                alert("Producto actualizado exitosamente!");
+            } else {
+                // Insert new product
+                const { error: dbError } = await supabase
+                    .from("productos")
+                    .insert([
+                        { nombre, codigo, precio, descripcion, categoria, url: imageUrl },
+                    ]);
 
-            alert("Producto subido exitosamente!");
+                if (dbError) throw dbError;
+                alert("Producto subido exitosamente!");
+            }
+
             fetchProductos();
-
-            setNombre("");
-            setCodigo("");
-            setPrecio("");
-            setDescripcion("");
-            setCategoria("Iluminación");
-            setFile(null);
+            resetForm();
         } catch (error) {
             console.error("Error uploading file:", error.message);
             alert(error.message);
@@ -111,10 +127,10 @@ const Authenticated = ({ user }) => {
 
     const handleEdit = (producto) => {
         setNombre(producto.nombre);
-        setCodigo(producto.codigo); // Agregar esto para que el código se llene al editar
+        setCodigo(producto.codigo);
         setPrecio(producto.precio);
         setDescripcion(producto.descripcion);
-        setCategoria(producto.categoria); // Asegurarse también de cargar la categoría
+        setCategoria(producto.categoria);
         setEditingId(producto.id);
     };
 
@@ -125,6 +141,7 @@ const Authenticated = ({ user }) => {
                 nombre,
                 precio,
                 descripcion,
+                categoria,
             })
             .eq("id", editingId);
 
@@ -133,11 +150,18 @@ const Authenticated = ({ user }) => {
         } else {
             alert("Producto actualizado correctamente!");
             fetchProductos();
-            setNombre("");
-            setPrecio("");
-            setDescripcion("");
-            setEditingId(null);
+            resetForm();
         }
+    };
+
+    const resetForm = () => {
+        setNombre("");
+        setCodigo("");
+        setPrecio("");
+        setDescripcion("");
+        setCategoria("Iluminación");
+        setFile(null);
+        setEditingId(null);
     };
 
     const filteredProductos = productos.filter((producto) =>
@@ -199,12 +223,9 @@ const Authenticated = ({ user }) => {
                             value={categoria}
                             onChange={(e) => setCategoria(e.target.value)}
                             className="border rounded-md w-full px-3 py-2"
-                            required // Asegúrate de que esto esté aquí para requerir la selección
+                            required
                         >
-                            <option value="">
-                                Selecciona una categoría
-                            </option>{" "}
-                            {/* Opción por defecto */}
+                            <option value="">Selecciona una categoría</option>
                             <option value="baños">Baños</option>
                             <option value="electrico">Eléctrico</option>
                             <option value="ferreteria">Ferretería</option>
@@ -228,7 +249,6 @@ const Authenticated = ({ user }) => {
                             accept="image/*"
                             onChange={(e) => setFile(e.target.files[0])}
                             className="border rounded-md w-full px-3 py-2"
-                            required
                         />
                     </div>
                     <button
@@ -236,12 +256,15 @@ const Authenticated = ({ user }) => {
                         disabled={uploading}
                         className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600"
                     >
-                        {uploading ? "Subiendo..." : "Subir Producto"}
+                        {uploading
+                            ? "Subiendo..."
+                            : editingId
+                            ? "Actualizar Producto"
+                            : "Subir Producto"}
                     </button>
                 </form>
             </div>
 
-            {/* Buscador */}
             <div className="mb-6">
                 <input
                     type="text"
@@ -252,14 +275,13 @@ const Authenticated = ({ user }) => {
                 />
             </div>
 
-            {/* Tabla de productos */}
             <h2 className="text-xl font-semibold mb-4">Productos</h2>
             <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                 <thead className="bg-gray-50">
                     <tr>
                         <th className="px-4 py-2">Nombre</th>
                         <th className="px-4 py-2">Precio</th>
-                        <th className="px-4 py-2">Categoría</th>
+                        <th className="px-4 py-2">categoria</th>
                         <th className="px-4 py-2">Imagen</th>
                         <th className="px-4 py-2">Acciones</th>
                     </tr>
@@ -277,10 +299,10 @@ const Authenticated = ({ user }) => {
                                     className="h-16 w-16 object-cover rounded-md"
                                 />
                             </td>
-                            <td className="border px-4 py-2 space-x-2">
+                            <td className="border px-4 py-2">
                                 <button
                                     onClick={() => handleEdit(producto)}
-                                    className="bg-yellow-400 text-white rounded-md px-2 py-1 hover:bg-yellow-500"
+                                    className="bg-yellow-400 text-white rounded-md px-2 py-1 hover:bg-yellow-500 mr-2"
                                 >
                                     Editar
                                 </button>

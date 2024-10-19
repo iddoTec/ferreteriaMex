@@ -1,6 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import hero1 from "../../public/img/hero/hero1.png";
+import hero2 from "../../public/img/hero/hero2.png";
+import hero3 from "../../public/img/hero/hero3.png";
+import hero4 from "../../public/img/hero/hero4.png";
 ---
 
 <section id="hero" class="scroll-mt-16 lg:p-4 size-tb:-mt-16 size-pc:-mt-20">
@@ -18,28 +21,37 @@ import hero1 from "../../public/img/hero/hero1.png";
                 >
 
                     <div class="hs-carousel-slide">
-                        <a href="/catalog/category1">
+                        <a href="/products?categoria=construccion">
                             <div class="flex flex-col items-center justify-center mt-14 w-full h-[320px] md:h-[500px] lg:h-[720px] xl:h-[950px]">
-                                <Image class=" w-full h-full object-cover object-left-top" src={hero1} alt="producto1"/>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- <div class="hs-carousel-slide">
-                        <a href="/catalog/category3">
-                            <div class="flex flex-col items-center justify-center h-full">
-                                <Image class="object-cover object-top h-full sm:h-5/6 sm:w-5/6 lg:w-full" src={hero1} alt="producto2"/>
+                                <Image class=" w-full h-full object-cover lg:object-contain object-left-top" src={hero1} alt="producto1"/>
                             </div>
                         </a>
                     </div>
 
                     <div class="hs-carousel-slide">
-                        <a href="/catalog/category4">
-                            <div class="flex flex-col items-center justify-center h-full">
-                                <Image class="object-cover object-top h-full sm:h-5/6 sm:w-5/6 lg:w-full" src={hero1} alt="producto3"/>
+                        <a href="/products?categoria=baños">
+                            <div class="flex flex-col items-center justify-center mt-14 w-full h-[320px] md:h-[500px] lg:h-[720px] xl:h-[950px]">
+                                <Image class=" w-full h-full object-cover lg:object-contain object-left-top" src={hero2} alt="producto2"/>
                             </div>
                         </a>
-                    </div> -->
+                    </div>
+
+                    <div class="hs-carousel-slide">
+                        <a href="/products?categoria=ferreteria">
+                            <div class="flex flex-col items-center justify-center mt-14 w-full h-[320px] md:h-[500px] lg:h-[720px] xl:h-[950px]">
+                                <Image class=" w-full h-full object-cover lg:object-contain object-left-top" src={hero3} alt="producto3"/>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="hs-carousel-slide">
+                        <a href="/products?categoria=ferreteria">
+                            <div class="flex flex-col items-center justify-center mt-14 w-full h-[320px] md:h-[500px] lg:h-[720px] xl:h-[950px]">
+                                <Image class=" w-full h-full object-cover lg:object-contain object-left-top" src={hero4} alt="producto4"/>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
