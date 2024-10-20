@@ -164,13 +164,25 @@ const Authenticated = ({ user }) => {
         setEditingId(null);
     };
 
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+    };
+
     const filteredProductos = productos.filter((producto) =>
         producto.nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
         <div className="h-full p-6 m-6">
-            <h1 className="text-2xl font-semibold mb-6">Bienvenido, {user.email}</h1>
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-semibold">Bienvenido, {user.email}</h1>
+                <button
+                    onClick={handleLogout}
+                    className="bg-red-500 text-white text-sm px-4 py-2 rounded hover:bg-red-600 transition"
+                >
+                    Cerrar Sesión
+                </button>
+            </div>
 
             <div className="bg-white shadow-md rounded-lg p-6 mb-6">
                 <h2 className="text-xl font-semibold mb-4">
