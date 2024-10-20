@@ -53,7 +53,7 @@ const Products = () => {
     );
 
     if (loading) {
-        return <p>Cargando productos...</p>;
+        return <p className="mt-20 text-center">Cargando productos...</p>;
     }
 
     return (
@@ -125,7 +125,7 @@ const Products = () => {
                         </div>
                     ))
                 ) : (
-                    <p className="text-xl text-gray-600 text-center">
+                    <p className="text-xl text-gray-600 text-center mt-8">
                         No hay productos disponibles en esta categoría.
                     </p>
                 )}
