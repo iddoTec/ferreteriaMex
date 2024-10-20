@@ -2,44 +2,45 @@
 const { products } = Astro.props;
 ---
 
-<section id="carousel" class="scroll-mt-20 mt-10 sm:mt-0 sm:px-4 overflow-x-hidden">
+<section id="carousel" class="scroll-mt-20 mt-10 sm:mt-0 sm:px-4">
     <article class="col-span-2 size-tb:hidden">
         <div
             data-hs-carousel='{"loadingClasses": "opacity-0", "isAutoPlay": true }'
             class="relative"
         >
             <div
-                class="hs-carousel relative w-full min-h-72 lg:rounded-s-3xl sm:min-h-[35rem] lg:min-h-[700px]"
+                class="hs-carousel relative overflow-hidden w-full min-h-48 lg:rounded-s-3xl"
             >
                 <div
-                    class="hs-carousel-body top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0"
+                    class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0"
                 >
+                    <!-- Primera diapositiva con los primeros 4 productos -->
                     <div class="hs-carousel-slide">
-                        <div class="flex justify-center h-full">
+                        <div class="flex justify-center h-full space-x-1">
                             {
-                                products.slice(0, 1).map((product) => (
-                                    <div class="container">
-                                        <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
+                                products.slice(0, 4).map((product) => (
+                                    <div class="container py-4 w-24 sm:w-64">
+                                        <div class="mx-auto flex flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
                                             <div class="relative flex justify-center">
                                                 <img
                                                     src={product.img}
                                                     alt={product.nombre}
-                                                    class="h-72 w-full object-contain object-top mb-4"
+                                                    class="h-20 sm:h-48 w-full object-contain object-center mb-2"
                                                 />
-                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-[10px] px-2 py-1 rounded-lg">
                                                     ${product.precio}
                                                 </div>
                                             </div>
 
-                                            <div class="p-6">
-                                                <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre.length > 35
-                                                        ? `${product.nombre.slice(0, 35)}...`
+                                            <div class="p-2 sm:p-6">
+                                                <h1 class="text-[10px] font-medium text-gray-700 pb-1 sm:pb-2">
+                                                    {product.nombre.length > 18
+                                                        ? `${product.nombre.slice(0, 18)}...`
                                                         : product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6 h-24">
-                                                    {product.descripcion.length > 130
-                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                <p class="text-[6px] text-gray-500 leading-4 sm:leading-6 h-8 sm:h-24">
+                                                    {product.descripcion.length > 35
+                                                        ? `${product.descripcion.slice(0, 35)}...`
                                                         : product.descripcion}
                                                 </p>
                                             </div>
@@ -50,246 +51,33 @@ const { products } = Astro.props;
                         </div>
                     </div>
 
+                    <!-- Segunda diapositiva con los siguientes 4 productos -->
                     <div class="hs-carousel-slide">
-                        <div class="flex justify-center h-full">
+                        <div class="flex justify-center h-full space-x-1">
                             {
-                                products.slice(1, 2).map((product) => (
-                                    <div class="container">
-                                        <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
+                                products.slice(4, 8).map((product) => (
+                                    <div class="container py-4 w-24 sm:w-64">
+                                        <div class="mx-auto flex flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
                                             <div class="relative flex justify-center">
                                                 <img
                                                     src={product.img}
                                                     alt={product.nombre}
-                                                    class="h-72 w-full object-contain object-top mb-4"
+                                                    class="h-20 sm:h-48 w-full object-contain object-center mb-2"
                                                 />
-                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
+                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-[10px] px-2 py-1 rounded-lg">
                                                     ${product.precio}
                                                 </div>
                                             </div>
 
-                                            <div class="p-6">
-                                                <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre.length > 35
-                                                        ? `${product.nombre.slice(0, 35)}...`
+                                            <div class="p-2 sm:p-6">
+                                                <h1 class="text-[10px] font-medium text-gray-700 pb-1 sm:pb-2">
+                                                    {product.nombre.length > 18
+                                                        ? `${product.nombre.slice(0, 18)}...`
                                                         : product.nombre}
                                                 </h1>
-                                                <p class="text text-gray-500 leading-6 h-24">
-                                                    {product.descripcion.length > 130
-                                                        ? `${product.descripcion.slice(0, 130)}...`
-                                                        : product.descripcion}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-
-                    <div class="hs-carousel-slide">
-                        <div class="flex justify-center h-full">
-                            {
-                                products.slice(2, 3).map((product) => (
-                                    <div class="container">
-                                        <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <div class="relative flex justify-center">
-                                                <img
-                                                    src={product.img}
-                                                    alt={product.nombre}
-                                                    class="h-72 w-full object-contain object-top mb-4"
-                                                />
-                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
-                                                    ${product.precio}
-                                                </div>
-                                            </div>
-
-                                            <div class="p-6">
-                                                <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre.length > 35
-                                                        ? `${product.nombre.slice(0, 35)}...`
-                                                        : product.nombre}
-                                                </h1>
-                                                <p class="text text-gray-500 leading-6 h-24">
-                                                    {product.descripcion.length > 130
-                                                        ? `${product.descripcion.slice(0, 130)}...`
-                                                        : product.descripcion}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-
-                    <div class="hs-carousel-slide">
-                        <div class="flex justify-center h-full">
-                            {
-                                products.slice(3, 4).map((product) => (
-                                    <div class="container">
-                                        <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <div class="relative flex justify-center">
-                                                <img
-                                                    src={product.img}
-                                                    alt={product.nombre}
-                                                    class="h-72 w-full object-contain object-top mb-4"
-                                                />
-                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
-                                                    ${product.precio}
-                                                </div>
-                                            </div>
-
-                                            <div class="p-6">
-                                                <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre.length > 35
-                                                        ? `${product.nombre.slice(0, 35)}...`
-                                                        : product.nombre}
-                                                </h1>
-                                                <p class="text text-gray-500 leading-6 h-24">
-                                                    {product.descripcion.length > 130
-                                                        ? `${product.descripcion.slice(0, 130)}...`
-                                                        : product.descripcion}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                    <div class="hs-carousel-slide">
-                        <div class="flex justify-center h-full">
-                            {
-                                products.slice(4, 5).map((product) => (
-                                    <div class="container">
-                                        <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <div class="relative flex justify-center">
-                                                <img
-                                                    src={product.img}
-                                                    alt={product.nombre}
-                                                    class="h-72 w-full object-contain object-top mb-4"
-                                                />
-                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
-                                                    ${product.precio}
-                                                </div>
-                                            </div>
-
-                                            <div class="p-6">
-                                                <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre.length > 35
-                                                        ? `${product.nombre.slice(0, 35)}...`
-                                                        : product.nombre}
-                                                </h1>
-                                                <p class="text text-gray-500 leading-6 h-24">
-                                                    {product.descripcion.length > 130
-                                                        ? `${product.descripcion.slice(0, 130)}...`
-                                                        : product.descripcion}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-
-                    <div class="hs-carousel-slide">
-                        <div class="flex justify-center h-full">
-                            {
-                                products.slice(5, 6).map((product) => (
-                                    <div class="container">
-                                        <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <div class="relative flex justify-center">
-                                                <img
-                                                    src={product.img}
-                                                    alt={product.nombre}
-                                                    class="h-72 w-full object-contain object-top mb-4"
-                                                />
-                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
-                                                    ${product.precio}
-                                                </div>
-                                            </div>
-
-                                            <div class="p-6">
-                                                <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre.length > 35
-                                                        ? `${product.nombre.slice(0, 35)}...`
-                                                        : product.nombre}
-                                                </h1>
-                                                <p class="text text-gray-500 leading-6 h-24">
-                                                    {product.descripcion.length > 130
-                                                        ? `${product.descripcion.slice(0, 130)}...`
-                                                        : product.descripcion}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                    <div class="hs-carousel-slide">
-                        <div class="flex justify-center h-full">
-                            {
-                                products.slice(6, 7).map((product) => (
-                                    <div class="container">
-                                        <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <div class="relative flex justify-center">
-                                                <img
-                                                    src={product.img}
-                                                    alt={product.nombre}
-                                                    class="h-72 w-full object-contain object-top mb-4"
-                                                />
-                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
-                                                    ${product.precio}
-                                                </div>
-                                            </div>
-
-                                            <div class="p-6">
-                                                <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre.length > 35
-                                                        ? `${product.nombre.slice(0, 35)}...`
-                                                        : product.nombre}
-                                                </h1>
-                                                <p class="text text-gray-500 leading-6 h-24">
-                                                    {product.descripcion.length > 130
-                                                        ? `${product.descripcion.slice(0, 130)}...`
-                                                        : product.descripcion}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-
-                    <div class="hs-carousel-slide">
-                        <div class="flex justify-center h-full">
-                            {
-                                products.slice(7, 8).map((product) => (
-                                    <div class="container">
-                                        <div class="mx-auto flex w-80 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-gray-400/20">
-                                            <div class="relative flex justify-center">
-                                                <img
-                                                    src={product.img}
-                                                    alt={product.nombre}
-                                                    class="h-72 w-full object-contain object-top mb-4"
-                                                />
-                                                <div class="absolute bottom-2 right-2 bg-sky-950 text-white text-sm px-2 py-1 rounded-lg">
-                                                    ${product.precio}
-                                                </div>
-                                            </div>
-
-                                            <div class="p-6">
-                                                <h1 class="text-2xl font-medium text-gray-700 pb-2">
-                                                    {product.nombre.length > 35
-                                                        ? `${product.nombre.slice(0, 35)}...`
-                                                        : product.nombre}
-                                                </h1>
-                                                <p class="text text-gray-500 leading-6 h-24">
-                                                    {product.descripcion.length > 130
-                                                        ? `${product.descripcion.slice(0, 130)}...`
+                                                <p class="text-[6px] text-gray-500 leading-4 sm:leading-6 h-8 sm:h-24">
+                                                    {product.descripcion.length > 35
+                                                        ? `${product.descripcion.slice(0, 35)}...`
                                                         : product.descripcion}
                                                 </p>
                                             </div>
