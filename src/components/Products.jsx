@@ -6,6 +6,7 @@ const Products = () => {
     const [loading, setLoading] = useState(true);
     const [categoria, setCategoria] = useState("");
     const [searchTerm, setSearchTerm] = useState(""); // Nuevo estado para el buscador
+    const [expandedProductos, setExpandedProductos] = useState({}); // Estado para controlar el ver más/ver menos
 
     // Primer useEffect: obtener la categoría desde la URL
     useEffect(() => {
@@ -16,7 +17,6 @@ const Products = () => {
 
     // Segundo useEffect: hacer la consulta a la base de datos cuando la categoría esté disponible
     useEffect(() => {
-        console.log("la categoria es:", categoria); 
         const fetchProductosPorCategoria = async () => {
             if (!categoria) return; // Esperar a que haya un valor en "categoria"
 
@@ -45,6 +45,14 @@ const Products = () => {
     // Función para limpiar el campo de búsqueda
     const clearSearch = () => {
         setSearchTerm("");
+    };
+
+    // Función para controlar el botón de ver más/ver menos
+    const toggleVerMas = (id) => {
+        setExpandedProductos((prev) => ({
+            ...prev,
+            [id]: !prev[id], // Cambiar el estado de expansión para el producto específico
+        }));
     };
 
     // Filtrar los productos según el término de búsqueda
@@ -108,13 +116,39 @@ const Products = () => {
                                         ${producto.precio}
                                     </p>
                                 </div>
+
+                                {/* Descripción del producto con ver más/ver menos */}
                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
-                                    {producto.descripcion.length > 90
-                                        ? producto.descripcion.substring(0, 90) + "..."
-                                        : producto.descripcion}
+                                    {expandedProductos[producto.id]
+                                        ? producto.descripcion // Mostrar toda la descripción si está expandido
+                                        : producto.descripcion.length > 90
+                                            ? producto.descripcion.substring(0, 90) + "..."
+                                            : producto.descripcion}
                                 </p>
+                                {producto.descripcion.length <= 90 && (
+                                        <br/>
+                                    )}
+                                {producto.descripcion.length <= 90 && (
+                                        <br/>
+                                    )}
+                                
+                                {/* Botón Ver más/Ver menos */}
+                                {producto.descripcion.length > 90 && (
+                                    <button
+                                        className="text-blue-500 text-sm mt-2 focus:outline-none"
+                                        onClick={() => toggleVerMas(producto.id)}
+                                    >
+                                        {expandedProductos[producto.id] ? "Ver menos" : "Ver más"}
+                                    </button>
+                                )}
                             </div>
-                            <a href="https://wa.me/523521458233?text=Hola,%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20algunos%20productos...%20" target="_blank" rel="noopener noreferrer" className="p-6 pt-0">
+
+                            <a
+                                href="https://wa.me/523521458233?text=Hola,%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20algunos%20productos...%20"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-6 pt-0"
+                            >
                                 <button
                                     className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-blue-600 text-white shadow-md hover:bg-blue-700 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none block w-full hover:scale-105 focus:scale-105 active:scale-100"
                                     type="button"
