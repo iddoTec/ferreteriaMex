@@ -108,11 +108,12 @@ const Products = () => {
                             <div className="p-4">
                                 <div className="flex items-center justify-between mb-2">
                                     <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                                        {producto.nombre.length > 25
+                                        {/* {producto.nombre.length > 25
                                             ? producto.nombre.substring(0, 25) + "..."
-                                            : producto.nombre}
+                                            : producto.nombre} */}
+                                            {producto.nombre}
                                     </p>
-                                    <p className="block font-sans text-lg antialiased font-bold leading-relaxed text-red-600">
+                                    <p className="block font-sans text-lg antialiased font-bold leading-relaxed text-red-600 ml-2">
                                         ${producto.precio}
                                     </p>
                                 </div>
