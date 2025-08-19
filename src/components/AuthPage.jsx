@@ -1,36 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { supabase } from "../auth/supabaseClient";
+import React, { useState } from "react";
 import Login from "./Login";
 import Authenticated from "./Authenticated";
 
 const AuthPage = () => {
-    const [user, setUser] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState({ email: "admin" }); // Puedes cambiar el email si lo deseas
 
-    useEffect(() => {
-        const checkAuth = async () => {
-            const {
-                data: { session },
-            } = await supabase.auth.getSession();
-            setUser(session?.user || null);
-        };
+    const handleLogin = () => {
+        setIsAuthenticated(true);
+    };
 
-        // Check authentication on component mount
-        checkAuth();
-
-        // Optionally, you might want to listen for auth state changes
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange((_, session) => {
-            setUser(session?.user || null);
-        });
-
-        // Clean up the subscription on component unmount
-        return () => {
-            subscription?.unsubscribe();
-        };
-    }, []);
-
-    return user ? <Authenticated user={user} /> : <Login />;
+    return isAuthenticated ? <Authenticated user={user} /> : <Login onLogin={handleLogin} />;
 };
 
 export default AuthPage;

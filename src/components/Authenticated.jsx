@@ -164,8 +164,8 @@ const Authenticated = ({ user }) => {
         setEditingId(null);
     };
 
-    const handleLogout = async () => {
-        await supabase.auth.signOut();
+    const handleLogout = () => {
+        window.location.reload(); // Simple logout, puedes mejorar esto si lo deseas
     };
 
     const filteredProductos = productos.filter((producto) =>
